@@ -22,8 +22,8 @@ $dbErrors[] = $wpdb->last_error;
 
 $tables_list = $wpdb->get_col('SHOW TABLES', 0);
 $dbErrors[] = $wpdb->last_error;
-$dbErrors[]=get_blog_prefix();
-$wp_options_table_fieldnames = $wpdb->get_col('DESC wp_options', 0);
+
+$wp_options_table_fieldnames = $wpdb->get_col('DESC '.$wpdb->get_blog_prefix().'options', 0);
 $dbErrors[] = $wpdb->last_error;
 
 ?>
