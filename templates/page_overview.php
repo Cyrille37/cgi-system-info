@@ -18,13 +18,13 @@ global $wpdb ;
 $dbErrors = array();
 
 $mysql_server_version = $wpdb->db_version();
-$dbErrors[] = $wpdb->last_error;
+if( ! empty( $wpdb->last_error) ) $dbErrors[] = $wpdb->last_error;
 
 $tables_list = $wpdb->get_col('SHOW TABLES', 0);
-$dbErrors[] = $wpdb->last_error;
+if( ! empty( $wpdb->last_error) ) $dbErrors[] = $wpdb->last_error;
 
 $wp_options_table_fieldnames = $wpdb->get_col('DESC '.$wpdb->get_blog_prefix().'options', 0);
-$dbErrors[] = $wpdb->last_error;
+if( ! empty( $wpdb->last_error) ) $dbErrors[] = $wpdb->last_error;
 
 ?>
 <div class="wrap">
@@ -59,7 +59,7 @@ $dbErrors[] = $wpdb->last_error;
 			<td nowrap="nowrap">wp_options table fieldnames</td><td><?php echo (is_array($wp_options_table_fieldnames)) ? implode(',',$wp_options_table_fieldnames): 'null' ?></td>
 		</tr>
 		<tr>
-			<td nowrap="nowrap">db errors</td><td><?php echo implode('<br/>',$dbErrors) ?></td>
+			<td nowrap="nowrap">db errors</td><td><?php echo (count($dbErrors)>0 ? implode('<br/>',$dbErrors) : 'no error') ?></td>
 		</tr>
 	</table>
 
