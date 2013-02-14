@@ -15,19 +15,22 @@ else
 }
 
 global $wpdb ;
+$dbErrors = array();
 
 $mysql_server_version = $wpdb->db_version();
-
-$wp_options_table_fieldnames = $wpdb->get_col('DESC wp_options', 0);
+$dbErrors[] = $wpdb->last_error;
 
 $tables_list = $wpdb->get_col('SHOW TABLES', 0);
+$dbErrors[] = $wpdb->last_error;
+
+$wp_options_table_fieldnames = $wpdb->get_col('DESC wp_options', 0);
+$dbErrors[] = $wpdb->last_error;
 
 ?>
 <div class="wrap">
+	
 	<div id="icon-options-general" class="icon32">
-		<br>
 	</div>
-
 	<h2><?php _e('System information',
 	CgiSystemInfo::PLUGIN); ?></h2>
 
@@ -55,9 +58,13 @@ $tables_list = $wpdb->get_col('SHOW TABLES', 0);
 		<tr>
 			<td nowrap="nowrap">wp_options table fieldnames</td><td><?php echo (is_array($wp_options_table_fieldnames)) ? implode(',',$wp_options_table_fieldnames): 'null' ?></td>
 		</tr>
+		<tr>
+			<td nowrap="nowrap">db errors</td><td><?php echo implode('<br/>',$dbErrors) ?></td>
+		</tr>
 	</table>
 
 	<p>&nbsp;</p>
 
 	<?php phpinfo() ?>
+
 </div>
