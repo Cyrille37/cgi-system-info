@@ -26,6 +26,8 @@ if( ! empty( $wpdb->last_error) ) $dbErrors[] = $wpdb->last_error;
 $wp_options_table_fieldnames = $wpdb->get_col('DESC '.$wpdb->get_blog_prefix().'options', 0);
 if( ! empty( $wpdb->last_error) ) $dbErrors[] = $wpdb->last_error;
 
+$post_types=get_post_types();
+
 ?>
 <div class="wrap">
 	
@@ -35,6 +37,8 @@ if( ! empty( $wpdb->last_error) ) $dbErrors[] = $wpdb->last_error;
 	CgiSystemInfo::PLUGIN); ?></h2>
 
 	<p>&nbsp;</p>
+
+	<p>&gt;&gt; <a href="#phpinfo">phpinfo</a></p>
 
 	<table class="widefat">
 		<tr>
@@ -63,7 +67,22 @@ if( ! empty( $wpdb->last_error) ) $dbErrors[] = $wpdb->last_error;
 		</tr>
 	</table>
 
+	<table class="widefat">
+		<tr>
+			<td nowrap="nowrap">WP post types <i>(<a href="http://codex.wordpress.org/Function_Reference/register_post_type" target="_blank">doc</a>)</i></td><td>
+				<?php 
+					$post_types=get_post_types('','names'); 
+					foreach ($post_types as $post_type ) {
+					  echo '<p>'. $post_type. '</p>';
+					}
+				?>
+			</td>
+		</tr>
+	</table>
+
 	<p>&nbsp;</p>
+
+	<a name="phpinfo"></a>
 
 	<?php phpinfo() ?>
 
