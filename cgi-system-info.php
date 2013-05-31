@@ -50,7 +50,7 @@ if (!class_exists('CgiSystemInfo')) {
 
 		public function wp_activate() {
 			
-			self::_log(__METHOD__);
+			//self::_log(__METHOD__);
 
 			// Nothing done, plugin is activated
 			// return false ;
@@ -65,7 +65,7 @@ if (!class_exists('CgiSystemInfo')) {
 
 		public function wp_deactivate() {
 
-			self::_log(__METHOD__);
+			//self::_log(__METHOD__);
 			
 		}
 
