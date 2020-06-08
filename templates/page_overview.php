@@ -84,6 +84,20 @@ $post_types=get_post_types();
 
 	<a name="phpinfo"></a>
 
+	<script id="phpinfo-doc" type="text/template">
 	<?php phpinfo() ?>
+	</script>
+	<iframe id="phpinfo-iframe" width="100%" height="1024">
+	</iframe>
+	<script type="text/javascript">
+	jQuery(function()
+	{
+		jQuery('#phpinfo-iframe');
+		var doc = document.getElementById('phpinfo-iframe').contentWindow.document;
+   		doc.open();
+   		doc.write( jQuery('#phpinfo-doc').html() );
+   		doc.close();
+	});
+	</script>
 
 </div>
